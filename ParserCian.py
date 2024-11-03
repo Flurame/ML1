@@ -115,16 +115,13 @@ def collect_real_estate_data(locations, deal_type="sale", rooms='all', start_pag
                     "underground": flat.get("underground", "Не указано"),
                     "residential_complex": flat.get("residential_complex", "Не указано"),
                     "house_material_type": flat.get("house_material_type", "Не указано"),
-                    "year_construction": flat.get("year_construction", -1),
-                    "have_loggia": flat.get("have_loggia", "Не указано"),
-                    "object_type": flat.get("object_type", "Не указано")  
+                    "year_construction": flat.get("year_construction", -1), 
                 }
 
                 if with_extra_data:
                     processed_flat["finishing_type"] = flat.get("finishing_type", "Не указано")
                     processed_flat["heating_type"] = flat.get("heating_type", "Не указано")
                     processed_flat["housing_type"] = flat.get("housing_type", "Не указано")
-                    processed_flat["kitchen_area"] = flat.get("kitchen_area", -1)
                 processed_data.append(processed_flat)
 
             all_data.extend(processed_data)
@@ -133,7 +130,7 @@ def collect_real_estate_data(locations, deal_type="sale", rooms='all', start_pag
                 save_data_to_csv(all_data[:100], file_name)
                 all_data = all_data[100:]
 
-            time.sleep(random.uniform(2, 4))  # Увеличиние паузы между запросами 
+            time.sleep(random.uniform(2, 9))  # Увеличиние паузы между запросами 
 
         if all_data:
             save_data_to_csv(all_data, file_name)
@@ -144,4 +141,4 @@ def collect_real_estate_data(locations, deal_type="sale", rooms='all', start_pag
 
 
 collect_real_estate_data(locations=locations, deal_type="sale", rooms='all', start_page=1, end_page=54,
-                         file_name="cian.csv", with_extra_data=True)
+                         file_name="ParsedLogsCian.csv", with_extra_data=True)
